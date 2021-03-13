@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "node-esbuild",
+  "version": "0.0.1",
+  "generators": {
+    "node-esbuild": {
+      "factory": "./src/generators/node-esbuild/generator",
+      "schema": "./src/generators/node-esbuild/schema.json",
+      "description": "node-esbuild generator"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "projects": {
+    "node-esbuild": {
+      "root": "packages/node-esbuild",
+      "sourceRoot": "packages/node-esbuild/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/node-esbuild/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/node-esbuild"
+          ],
+          "options": {
+            "jestConfig": "packages/node-esbuild/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/node-esbuild",
+            "tsConfig": "packages/node-esbuild/tsconfig.lib.json",
+            "packageJson": "packages/node-esbuild/package.json",
+            "main": "packages/node-esbuild/src/index.ts",
+            "assets": [
+              "packages/node-esbuild/*.md",
+              {
+                "input": "./packages/node-esbuild/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/node-esbuild",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/node-esbuild",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "node-esbuild-e2e": {
+      "projectType": "application",
+      "root": "e2e/node-esbuild-e2e",
+      "sourceRoot": "e2e/node-esbuild-e2e/src",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "node-esbuild:build",
+            "npmPackageName": "@anatidaeproject/node-esbuild",
+            "pluginOutputPath": "dist/packages/node-esbuild",
+            "jestConfig": "e2e/node-esbuild-e2e/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}
