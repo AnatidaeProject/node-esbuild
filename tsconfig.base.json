@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "anatidaeproject/node-esbuild": ["packages/node-esbuild/src/index.ts"]
+      "anatidaeproject/node-esbuild": ["packages/node-esbuild/src/index.ts"],
+      "@anatidaeproject/utils": ["packages/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

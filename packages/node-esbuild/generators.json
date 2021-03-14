@@ -3,18 +3,14 @@
   "name": "node-esbuild",
   "version": "0.0.1",
   "generators": {
-    "node-esbuild": {
-      "factory": "./src/generators/node-esbuild/generator",
-      "schema": "./src/generators/node-esbuild/schema.json",
-      "description": "node-esbuild generator"
-    },
     "init": {
-      "factory": "./src/generators/init/generator",
+      "factory": "./src/generators/init/init",
       "schema": "./src/generators/init/schema.json",
-      "description": "init generator"
+      "description": "init generator",
+      "hidden": true
     },
     "application": {
-      "factory": "./src/generators/application/generator",
+      "factory": "./src/generators/application/application",
       "schema": "./src/generators/application/schema.json",
       "description": "application generator"
     },

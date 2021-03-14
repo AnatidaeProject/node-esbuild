@@ -1,5 +1,4 @@
-export interface InitGeneratorSchema {
-    name: string;
-    tags?: string;
-    directory?: string;
+export interface Schema {
+  unitTestRunner?: 'jest' | 'none';
+  skipFormat?: boolean;
 }

@@ -5,6 +5,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { peek } from '@anatidaeproject/utils';
 describe('node-esbuild e2e', () => {
   it('should create node-esbuild', async (done) => {
     const plugin = uniq('node-esbuild');
@@ -13,10 +14,11 @@ describe('node-esbuild e2e', () => {
       'dist/packages/node-esbuild'
     );
     await runNxCommandAsync(
-      `generate @anatidaeproject/node-esbuild:node-esbuild ${plugin}`
+      `generate @anatidaeproject/node-esbuild:application ${plugin}`
     );
 
     const result = await runNxCommandAsync(`build ${plugin}`);
+    peek(result);
     expect(result.stdout).toContain('Executor ran');
 
     done();
@@ -30,10 +32,10 @@ describe('node-esbuild e2e', () => {
         'dist/packages/node-esbuild'
       );
       await runNxCommandAsync(
-        `generate @anatidaeproject/node-esbuild:node-esbuild ${plugin} --directory subdir`
+        `generate @anatidaeproject/node-esbuild:application ${plugin} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
+        checkFilesExist(`apps/subdir/${plugin}/src/index.ts`)
       ).not.toThrow();
       done();
     });
@@ -47,7 +49,7 @@ describe('node-esbuild e2e', () => {
         'dist/packages/node-esbuild'
       );
       await runNxCommandAsync(
-        `generate @anatidaeproject/node-esbuild:node-esbuild ${plugin} --tags e2etag,e2ePackage`
+        `generate @anatidaeproject/node-esbuild:application ${plugin} --tags e2etag,e2ePackage`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
